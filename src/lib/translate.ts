@@ -1,7 +1,9 @@
-const ELIGIBLE = new Set(["b", "d", "g", "k", "l", "n", "s"]);
-
 function isConsonant(ch: string): boolean {
   return /^[a-zA-Z]$/.test(ch) && !"aeiouAEIOU".includes(ch);
+}
+
+function isEligible(ch: string): boolean {
+  return isConsonant(ch) && ch.toLowerCase() !== "r";
 }
 
 function transformWord(word: string): string {
@@ -10,7 +12,7 @@ function transformWord(word: string): string {
   const start = isConsonant(word[0]) ? 1 : 0;
 
   for (let i = start; i < word.length; i++) {
-    if (ELIGIBLE.has(word[i].toLowerCase())) {
+    if (isEligible(word[i])) {
       const m = word[i] === word[i].toUpperCase() ? "M" : "m";
       return word.slice(0, i) + m + word.slice(i);
     }
